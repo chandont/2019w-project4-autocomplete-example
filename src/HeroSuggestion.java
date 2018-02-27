@@ -17,7 +17,7 @@ public class HeroSuggestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	/*
-	 * populate the Marvel heros and DC heros map.
+	 * populate the Marvel heros and DC heros hash map.
 	 * Key is hero ID. Value is hero name.
 	 */
 	public static HashMap<Integer, String> marvelHerosMap = new HashMap<>();
@@ -89,26 +89,6 @@ public class HeroSuggestion extends HttpServlet {
      *   the "data" object can contain any additional information.
      * 
      * 
-     * You can also design different JSON formats to return to the frontend Javascript.
-     * For example, you want to use a different library and that library uses another format.
-     * Designing a format independent of the frontend library can make
-     *   your API not restricted by the library you use.
-     * 
-     * [
-     *  { 
-     *  	  "category": "dc",
-     *    "suggestions": [ 
-     *      { "name": "Superman", "heroID": 101 }, 
-     *      { "name": "Supergirl", "heroID": 113 } 
-     *     ]
-     *  },
-     *  { 
-     *    "category: "marvel",
-     *    "suggestions": [ ]
-     *  }
-     * ]
-     * 
-     * 
      */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -126,7 +106,7 @@ public class HeroSuggestion extends HttpServlet {
 			
 			// search on marvel heros and DC heros and add the results to JSON Array
 			// this example only does a substring match
-			// in project 4, you should do full text search with MySQL to find the matches on movies and stars
+			// TODO: in project 4, you should do full text search with MySQL to find the matches on movies and stars
 			
 			for (Integer id : marvelHerosMap.keySet()) {
 				String heroName = marvelHerosMap.get(id);
