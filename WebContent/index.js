@@ -104,7 +104,7 @@ $('#autocomplete').autocomplete({
     // set delay time
     deferRequestBy: 300,
     // there are some other parameters that you might want to use to satisfy all the requirements
-    // TODO: add other parameters, such as mininum characters
+    // TODO: add other parameters, such as minimum characters
 });
 
 
