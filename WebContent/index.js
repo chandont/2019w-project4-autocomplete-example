@@ -67,7 +67,7 @@ function handleLookupAjaxSuccess(data, query, doneCallback) {
 
 
 /*
- * This function is the select suggestion hanlder function. 
+ * This function is the select suggestion handler function. 
  * When a suggestion is selected, this function is called by the library.
  * 
  * You can redirect to the page you want using the suggestion data.
@@ -116,11 +116,11 @@ function handleNormalSearch(query) {
 	// TODO: you should do normal search here
 }
 
-// bind pressing enter key to a hanlder function
+// bind pressing enter key to a handler function
 $('#autocomplete').keypress(function(event) {
 	// keyCode 13 is the enter key
 	if (event.keyCode == 13) {
-		// pass the value of the input box to the hanlder function
+		// pass the value of the input box to the handler function
 		handleNormalSearch($('#autocomplete').val())
 	}
 })
