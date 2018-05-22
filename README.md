@@ -3,7 +3,7 @@
 This example shows how autocomplete search can be implemented.
 
 ### To run this example: 
-1. clone this repository using `git clone https://github.com/UCI-Chenli-teaching/autocomplete-example.git`
+1. clone this repository using `git clone https://github.com/UCI-Chenli-teaching/project4-autocomplete-example`
 2. open Eclipse -> File -> import -> under "Maven" -> "Existing Maven Projects" -> Click "Finish".
 3. For "Root Directory", click "Browse" and select this repository's folder. Click "Finish".
 4. You can then run this project on Tomcat server.
@@ -14,4 +14,3 @@ This example shows how autocomplete search can be implemented.
 `index.js` is the main Javascript file to use this jQuery autocomplete library to implement autocomplete search: https://github.com/devbridge/jQuery-Autocomplete
 
 `HeroSuggestion.java` is a Java servlet searches superhero names and return suggestions in JSON format.
-
