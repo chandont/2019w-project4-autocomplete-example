@@ -17,53 +17,50 @@ public class HeroSuggestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	/*
-	 * populate the Marvel heros and DC heros hash map.
+	 * populate the Super hero hash map.
 	 * Key is hero ID. Value is hero name.
 	 */
-	public static HashMap<Integer, String> marvelHerosMap = new HashMap<>();
-	public static HashMap<Integer, String> dcHerosMap = new HashMap<>();
+	public static HashMap<Integer, String> superHeroMap = new HashMap<>();
 	
 	static {
-		marvelHerosMap.put(1, "Blade");
-		marvelHerosMap.put(2, "Ghost Rider");
-		marvelHerosMap.put(3, "Luke Cage");
-		marvelHerosMap.put(4, "Silver Surfer");
-		marvelHerosMap.put(5, "Beast");
-		marvelHerosMap.put(6, "Thing");
-		marvelHerosMap.put(7, "Black Panther");
-		marvelHerosMap.put(8, "Invisible Woman");
-		marvelHerosMap.put(9, "Nick Fury");
-		marvelHerosMap.put(10, "Storm");
-		marvelHerosMap.put(11, "Iron Man");
-		marvelHerosMap.put(12, "Professor X");
-		marvelHerosMap.put(13, "Hulk");
-		marvelHerosMap.put(14, "Cyclops");
-		marvelHerosMap.put(15, "Thor");
-		marvelHerosMap.put(16, "Jean Grey");
-		marvelHerosMap.put(17, "Wolverine");
-		marvelHerosMap.put(18, "Daredevil");
-		marvelHerosMap.put(19, "Captain America");
-		marvelHerosMap.put(20, "Spider-Man");
-	}
-	
-	static {
-		dcHerosMap.put(101, "Superman");
-		dcHerosMap.put(102, "Batman");
-		dcHerosMap.put(103, "Wonder Woman");
-		dcHerosMap.put(104, "Flash");
-		dcHerosMap.put(105, "Green Lantern");
-		dcHerosMap.put(106, "Catwoman");
-		dcHerosMap.put(107, "Nightwing");
-		dcHerosMap.put(108, "Captain Marvel");
-		dcHerosMap.put(109, "Aquaman");
-		dcHerosMap.put(110, "Green Arrow");
-		dcHerosMap.put(111, "Martian Manhunter");
-		dcHerosMap.put(112, "Batgirl");
-		dcHerosMap.put(113, "Supergirl");
-		dcHerosMap.put(114, "Black Canary");
-		dcHerosMap.put(115, "Hawkgirl");
-		dcHerosMap.put(116, "Cyborg");
-		dcHerosMap.put(117, "Robin");
+		superHeroMap.put(1, "Blade");
+		superHeroMap.put(2, "Ghost Rider");
+		superHeroMap.put(3, "Luke Cage");
+		superHeroMap.put(4, "Silver Surfer");
+		superHeroMap.put(5, "Beast");
+		superHeroMap.put(6, "Thing");
+		superHeroMap.put(7, "Black Panther");
+		superHeroMap.put(8, "Invisible Woman");
+		superHeroMap.put(9, "Nick Fury");
+		superHeroMap.put(10, "Storm");
+		superHeroMap.put(11, "Iron Man");
+		superHeroMap.put(12, "Professor X");
+		superHeroMap.put(13, "Hulk");
+		superHeroMap.put(14, "Cyclops");
+		superHeroMap.put(15, "Thor");
+		superHeroMap.put(16, "Jean Grey");
+		superHeroMap.put(17, "Wolverine");
+		superHeroMap.put(18, "Daredevil");
+		superHeroMap.put(19, "Captain America");
+		superHeroMap.put(20, "Spider-Man");
+
+		superHeroMap.put(101, "Superman");
+		superHeroMap.put(102, "Batman");
+		superHeroMap.put(103, "Wonder Woman");
+		superHeroMap.put(104, "Flash");
+		superHeroMap.put(105, "Green Lantern");
+		superHeroMap.put(106, "Catwoman");
+		superHeroMap.put(107, "Nightwing");
+		superHeroMap.put(108, "Captain Marvel");
+		superHeroMap.put(109, "Aquaman");
+		superHeroMap.put(110, "Green Arrow");
+		superHeroMap.put(111, "Martian Manhunter");
+		superHeroMap.put(112, "Batgirl");
+		superHeroMap.put(113, "Supergirl");
+		superHeroMap.put(114, "Black Canary");
+		superHeroMap.put(115, "Hawkgirl");
+		superHeroMap.put(116, "Cyborg");
+		superHeroMap.put(117, "Robin");
 	}
     
     public HeroSuggestion() {
@@ -72,13 +69,13 @@ public class HeroSuggestion extends HttpServlet {
 
     /*
      * 
-     * Match the query against Marvel and DC heros and return a JSON response.
+     * Match the query against superheroes and return a JSON response.
      * 
      * For example, if the query is "super":
      * The JSON response look like this:
      * [
-     * 	{ "value": "Superman", "data": { "category": "dc", "heroID": 101 } },
-     * 	{ "value": "Supergirl", "data": { "category": "dc", "heroID": 113 } }
+     * 	{ "value": "Superman", "data": { "heroID": 101 } },
+     * 	{ "value": "Supergirl", "data": { "heroID": 113 } }
      * ]
      * 
      * The format is like this because it can be directly used by the 
@@ -104,21 +101,14 @@ public class HeroSuggestion extends HttpServlet {
 				return;
 			}	
 			
-			// search on marvel heros and DC heros and add the results to JSON Array
+			// search on superheroes and add the results to JSON Array
 			// this example only does a substring match
 			// TODO: in project 4, you should do full text search with MySQL to find the matches on movies and stars
 			
-			for (Integer id : marvelHerosMap.keySet()) {
-				String heroName = marvelHerosMap.get(id);
+			for (Integer id : superHeroMap.keySet()) {
+				String heroName = superHeroMap.get(id);
 				if (heroName.toLowerCase().contains(query.toLowerCase())) {
-					jsonArray.add(generateJsonObject(id, heroName, "marvel"));
-				}
-			}
-			
-			for (Integer id : dcHerosMap.keySet()) {
-				String heroName = dcHerosMap.get(id);
-				if (heroName.toLowerCase().contains(query.toLowerCase())) {
-					jsonArray.add(generateJsonObject(id, heroName, "dc"));
+					jsonArray.add(generateJsonObject(id, heroName));
 				}
 			}
 			
@@ -131,19 +121,18 @@ public class HeroSuggestion extends HttpServlet {
 	}
 	
 	/*
-	 * Generate the JSON Object from hero and category to be like this format:
+	 * Generate the JSON Object from hero to be like this format:
 	 * {
 	 *   "value": "Iron Man",
-	 *   "data": { "category": "marvel", "heroID": 11 }
+	 *   "data": { "heroID": 11 }
 	 * }
 	 * 
 	 */
-	private static JsonObject generateJsonObject(Integer heroID, String heroName, String categoryName) {
+	private static JsonObject generateJsonObject(Integer heroID, String heroName) {
 		JsonObject jsonObject = new JsonObject();
 		jsonObject.addProperty("value", heroName);
 		
 		JsonObject additionalDataJsonObject = new JsonObject();
-		additionalDataJsonObject.addProperty("category", categoryName);
 		additionalDataJsonObject.addProperty("heroID", heroID);
 		
 		jsonObject.add("data", additionalDataJsonObject);

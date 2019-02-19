@@ -75,9 +75,7 @@ function handleLookupAjaxSuccess(data, query, doneCallback) {
 function handleSelectSuggestion(suggestion) {
 	// TODO: jump to the specific result page based on the selected suggestion
 	
-	console.log("you select " + suggestion["value"])
-	var url = suggestion["data"]["category"] + "-hero" + "?id=" + suggestion["data"]["heroID"]
-	console.log(url)
+	console.log("you select " + suggestion["value"] + " with ID " + suggestion["data"]["heroID"])
 }
 
 
@@ -99,8 +97,6 @@ $('#autocomplete').autocomplete({
     onSelect: function(suggestion) {
     		handleSelectSuggestion(suggestion)
     },
-    // set the groupby name in the response json data field
-    groupBy: "category",
     // set delay time
     deferRequestBy: 300,
     // there are some other parameters that you might want to use to satisfy all the requirements
